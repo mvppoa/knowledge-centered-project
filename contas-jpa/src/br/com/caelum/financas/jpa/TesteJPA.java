@@ -6,6 +6,8 @@ import javax.persistence.Persistence;
 
 import br.com.caelum.financas.modelo.Conta;
 
+import java.math.BigDecimal;
+
 public class TesteJPA {
 
 	public static void main(String[] args) {
@@ -15,6 +17,7 @@ public class TesteJPA {
 		conta.setBanco("Caixa");
 		conta.setAgencia("043");
 		conta.setNumero("54321");
+		conta.setSaldo(new BigDecimal(4.5));
 
 		/**
 		 * Usando HSQLDB
@@ -44,8 +47,6 @@ public class TesteJPA {
 
 		em.getTransaction().begin();
 		Conta conta2 = em.createQuery("SELECT c from Conta c where c.id = 1",Conta.class).getResultList().get(0);
-		System.out.println(conta2.getAgencia());
-
-		em.close();
+		System.out.println(conta2.getSaldo());
 	}
 }
